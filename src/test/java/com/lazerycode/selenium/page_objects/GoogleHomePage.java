@@ -1,36 +1,30 @@
 package com.lazerycode.selenium.page_objects;
 
 import com.lazerycode.selenium.DriverBase;
-import com.lazerycode.selenium.util.Query;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.lazerycode.selenium.util.AssignDriver.initQueryObjects;
+
 
 public class GoogleHomePage {
 
-    private Query searchBar = new Query().defaultLocator(By.name("q"));
-    private Query googleSearch = new Query().defaultLocator(By.name("btnK"));
-    private Query imFeelingLucky = new Query().defaultLocator(By.name("btnI"));
+    String searchInput ="q";
+    String googleSearchBtn ="btnK";
+    String ImFeeleingLuckBtn ="BtnI";
 
+    protected final RemoteWebDriver driver = DriverBase.getDriver();
+    WebDriverWait wait = new WebDriverWait(driver, 20);
+    
     public GoogleHomePage() throws Exception {
-        initQueryObjects(this, DriverBase.getDriver());
     }
 
-    public GoogleHomePage enterSearchTerm(String searchTerm) {
-        searchBar.findWebElement().clear();
-        searchBar.findWebElement().sendKeys(searchTerm);
-
-        return this;
+    public void searchItem(String text){
+        driver.findElement(By.name("q")).sendKeys(text);
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("btnK")));
+        driver.findElement(By.name("btnK")).click();
     }
-
-    public GoogleHomePage submitSearch() {
-        googleSearch.findWebElement().submit();
-
-        return this;
-    }
-
-    public void getLucky() {
-        imFeelingLucky.findWebElement().click();
-    }
+    
 
 }

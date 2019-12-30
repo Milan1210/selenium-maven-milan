@@ -175,6 +175,7 @@
                             </systemPropertyVariables>
                             <includes>
                                 <!-- <include>Yahoo.java</include> -->
+                                <exclude>GoogleExampleIT.java</exclude>
                             </includes>
                             <excludes>
                                 <!-- <exclude>GoogleExampleIT.java</exclude> -->
